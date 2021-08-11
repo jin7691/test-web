@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+  <select id="getTest" resultType="HashMap">
+    SELECT test,teset2
+    FROM test
+    <!-- WHERE id = #{id} -->
+  </select>
+  
+  
+  <select id="getList" resultType="HashMap">
+  	SELECT 
+  		CONVERT(idproduct , char(10)) AS num,
+  		part,
+  		brand,
+  		series,
+  		body,
+  		product_option,
+  		product_code,
+  		product_name,
+  		product_part,
+  		pur_cost,
+  		center_cost,
+  		job_cost,
+  		pgc_cost,
+  		ust_yn,
+  		gen_product,
+  		garbage_name,
+  		CONVERT(product_count , char(10)) AS product_count,
+  		etc,
+  		date_format(inv_date,'%Y/%m/%d') AS inv_date,
+  		date_format(reg_date,'%Y/%m/%d') AS reg_date
+  		 
+    FROM product
+		<trim prefix="WHERE" prefixOverrides="AND | OR" >
+			<if test="num != null and num !=''">
+	  			AND idproduct = #{num}
+	  		</if>
+	  		<if test="garbage_name != null and garbage_name != ''">
+	  			AND garbage_name like '%${garbage_name}%'
+	  		</if>
+	  		<if test="product_code != null and product_code != ''">
+	  			AND product_code = #{product_code}
+	  		</if>
+	  		<if test="product_name != null and product_name != ''">
+	  			AND product_name like '%${product_name}%'
+	  		</if>
+	  		<if test="product_count != null and product_count != ''">
+	  			AND product_count = #{product_count}
+	  		</if>
+	  		<if test="inv_date != null and inv_date != ''">
+	  			AND inv_date = #{inv_date}
+	  		</if>
+	  		<if test="etc != null and etc != ''">
+	  			AND etc like '%${etc}%'
+	  		</if>
+	  		<if test="reg_date != null and reg_date != ''">
+	  			AND reg_date = #{reg_date}
+	  		</if>
+	  		<if test="part != null and part != ''">
+	  			AND part like '%#{part}%'
+	  		</if>
+	  		<if test="brand != null and brand != ''">
+	  			AND brand like '%#{brand}%'
+	  		</if>
+	  		<if test="series != null and series != ''">
+	  			AND series like '%#{series}%'
+	  		</if>
+	  		<if test="body != null and body != ''">
+	  			AND body like '%#{body}%'
+	  		</if>
+	  		<if test="product_option != null and product_option != ''">
+	  			AND product_option = #{product_option}
+	  		</if>
+	  		<if test="product_part != null and product_part != ''">
+	  			AND product_part = #{product_part}
+	  		</if>
+	  		<if test="pur_cost != null and pur_cost != ''">
+	  			AND pur_cost = #{pur_cost}
+	  		</if>
+	  		<if test="center_cost != null and center_cost != ''">
+	  			AND center_cost = #{center_cost}
+	  		</if>
+	  		<if test="job_cost != null and job_cost != ''">
+	  			AND job_cost = #{job_cost}
+	  		</if>
+	  		<if test="pgc_cost != null and pgc_cost != ''">
+	  			AND pgc_cost = #{pgc_cost}
+	  		</if>
+	  		<if test="ust_yn != null and ust_yn != ''">
+	  			AND ust_yn = #{ust_yn}
+	  		</if>
+	  		<if test="gen_product != null and gen_product != ''">
+	  			AND gen_product = #{gen_product}
+	  		</if>
+	  		
+		</trim>
+  </select>
+  
+  
+  <insert id="insert" >
+  	INSERT INTO product (
+  		<if test="num != null">
+  			idproduct,
+  		</if>
+  		<if test="garbage_name != null">
+  			garbage_name,
+  		</if>
+  		<if test="product_code != null">
+  			product_code,
+  		</if>
+  		<if test="product_name != null">
+  			product_name,
+  		</if>
+  		<if test="product_count != null">
+  			product_count,
+  		</if>
+  		<if test="inv_date != null">
+  			inv_date,
+  		</if>
+  		<if test="etc != null">
+  			etc,
+  		</if>
+  		<if test="part != null">
+  			part,
+  		</if>
+  		<if test="brand != null">
+  			brand,
+  		</if>
+  		<if test="series != null">
+  			series,
+  		</if>
+  		<if test="body != null">
+  			body,
+  		</if>
+  		<if test="product_option != null">
+  			product_option,
+  		</if>
+  		<if test="product_part != null">
+  			product_part,
+  		</if>
+  		<if test="pur_cost != null">
+  			pur_cost,
+  		</if>
+  		<if test="center_cost != null">
+  			center_cost,
+  		</if>
+  		<if test="job_cost != null">
+  			job_cost,
+  		</if>
+  		<if test="pgc_cost != null">
+  			pgc_cost,
+  		</if>
+  		<if test="ust_yn != null">
+  			ust_yn,
+  		</if>
+  		<if test="gen_product != null">
+  			gen_product,
+  		</if>
+  		reg_date
+  	) VALUES (
+	  	<if test="num != null">
+	  			#{num},
+  		</if>
+  		<if test="garbage_name != null">
+  			#{garbage_name},
+  		</if>
+  		<if test="product_code != null">
+  			#{product_code},
+  		</if>
+  		<if test="product_name != null">
+  			#{product_name},
+  		</if>
+  		<if test="product_count != null">
+  			#{product_count},
+  		</if>
+  		<if test="inv_date != null">
+  			#{inv_date},
+  		</if>
+  		<if test="etc != null">
+  			#{etc},
+  		</if>
+  		<if test="part != null">
+  			#{part},
+  		</if>
+  		<if test="brand != null">
+  			#{brand},
+  		</if>
+  		<if test="series != null">
+  			#{series},
+  		</if>
+  		<if test="body != null">
+  			#{body},
+  		</if>
+  		<if test="product_option != null">
+  			#{product_option},
+  		</if>
+  		<if test="product_part != null">
+  			#{product_part},
+  		</if>
+  		<if test="pur_cost != null">
+  			#{pur_cost},
+  		</if>
+  		<if test="center_cost != null">
+  			#{center_cost},
+  		</if>
+  		<if test="job_cost != null">
+  			#{job_cost},
+  		</if>
+  		<if test="pgc_cost != null">
+  			#{pgc_cost},
+  		</if>
+  		<if test="ust_yn != null">
+  			#{ust_yn},
+  		</if>
+  		<if test="gen_product != null">
+  			#{gen_product},
+  		</if>
+  		NOW()
+  	)ON DUPLICATE KEY UPDATE
+  		<if test="garbage_name != null"> 
+  			garbage_name = #{garbage_name},
+  		</if>
+  		<if test="product_code != null">
+  			product_code = #{product_code},
+  		</if>
+  		<if test="product_name != null">
+  			product_name = #{product_name},
+  		</if>
+  		<if test="product_count != null">
+	  		product_count = #{product_count},
+  		</if>
+  		<if test="inv_date != null">
+	  		inv_date = #{inv_date},
+  		</if>
+  		<if test="etc != null">
+	  		etc = #{etc},
+  		</if>
+  		<if test="part != null and part != ''">
+  			AND part = #{part},
+  		</if>
+  		<if test="brand != null and brand != ''">
+  			AND brand = #{brand},
+  		</if>
+  		<if test="series != null and series != ''">
+  			AND series = #{series},
+  		</if>
+  		<if test="body != null and body != ''">
+  			AND body = #{body},
+  		</if>
+  		<if test="product_option != null and product_option != ''">
+  			AND product_option = #{product_option},
+  		</if>
+  		<if test="product_part != null and product_part != ''">
+  			AND product_part = #{product_part},
+  		</if>
+  		<if test="pur_cost != null and pur_cost != ''">
+  			AND pur_cost = #{pur_cost},
+  		</if>
+  		<if test="center_cost != null and center_cost != ''">
+  			AND center_cost = #{center_cost},
+  		</if>
+  		<if test="job_cost != null and job_cost != ''">
+  			AND job_cost = #{job_cost},
+  		</if>
+  		<if test="pgc_cost != null and pgc_cost != ''">
+  			AND pgc_cost = #{pgc_cost},
+  		</if>
+  		<if test="ust_yn != null and ust_yn != ''">
+  			AND ust_yn = #{ust_yn},
+  		</if>
+  		<if test="gen_product != null and gen_product != ''">
+  			AND gen_product = #{gen_product},
+  		</if>
+  		reg_date = NOW()
+  
+  </insert>
+  
+  <delete id="delete" parameterType="String">
+  	DELETE FROM product
+  	WHERE idproduct = ${param}
+  
+  </delete>
+</mapper>
+
+
