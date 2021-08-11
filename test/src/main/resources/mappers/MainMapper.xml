@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MainMapper">
+  
+  
+  <select id="getList" resultType="HashMap">
+  	SELECT 
+  		CONVERT(idproduct , char(10)) AS num,
+  		garbage_name,
+  		product_code,
+  		product_name,
+  		CONVERT(product_count , char(10)) AS product_count,
+  		date_format(inv_date,'%Y/%m/%d') AS inv_date,
+  		etc,
+  		date_format(reg_date,'%Y/%m/%d') AS reg_date
+  		 
+    FROM product
+		<trim prefix="WHERE" prefixOverrides="AND | OR" >
+			<if test="num != null and num !=''">
+	  			AND idproduct = #{num}
+	  		</if>
+	  		<if test="garbage_name != null and garbage_name != ''">
+	  			AND garbage_name like '%${garbage_name}%'
+	  		</if>
+	  		<if test="product_code != null and product_code != ''">
+	  			AND product_code = #{product_code}
+	  		</if>
+	  		<if test="product_name != null and product_name != ''">
+	  			AND product_name like '%${product_name}%'
+	  		</if>
+	  		<if test="product_count != null and product_count != ''">
+	  			AND product_count = #{product_count}
+	  		</if>
+	  		<if test="inv_date != null and inv_date != ''">
+	  			AND inv_date = #{inv_date}
+	  		</if>
+	  		<if test="etc != null and etc != ''">
+	  			AND etc like '%${etc}%'
+	  		</if>
+	  		<if test="reg_date != null and reg_date != ''">
+	  			AND reg_date = #{reg_date}
+	  		</if>
+		</trim>
+  </select>
+  
+  
+  <insert id="insert" >
+  	INSERT INTO product (
+  		<if test="num != null">
+  			idproduct,
+  		</if>
+  		<if test="garbage_name != null">
+  			garbage_name,
+  		</if>
+  		<if test="product_code != null">
+  			product_code,
+  		</if>
+  		<if test="product_name != null">
+  			product_name,
+  		</if>
+  		<if test="product_count != null">
+  			product_count,
+  		</if>
+  		<if test="inv_date != null">
+  			inv_date,
+  		</if>
+  		<if test="etc != null">
+  			etc,
+  		</if>
+  		reg_date
+  	) VALUES (
+	  	<if test="num != null">
+	  			#{num},
+  		</if>
+  		<if test="garbage_name != null">
+  			#{garbage_name},
+  		</if>
+  		<if test="product_code != null">
+  			#{product_code},
+  		</if>
+  		<if test="product_name != null">
+  			#{product_name},
+  		</if>
+  		<if test="product_count != null">
+  			#{product_count},
+  		</if>
+  		<if test="inv_date != null">
+  			#{inv_date},
+  		</if>
+  		<if test="etc != null">
+  			#{etc},
+  		</if>
+  		NOW()
+  	)ON DUPLICATE KEY UPDATE
+  		<if test="garbage_name != null"> 
+  			garbage_name = #{garbage_name},
+  		</if>
+  		<if test="product_code != null">
+  			product_code = #{product_code},
+  		</if>
+  		<if test="product_name != null">
+  			product_name = #{product_name},
+  		</if>
+  		<if test="product_count != null">
+	  		product_count = #{product_count},
+  		</if>
+  		<if test="inv_date != null">
+	  		inv_date = #{inv_date},
+  		</if>
+  		<if test="etc != null">
+	  		etc = #{etc},
+  		</if>
+  		reg_date = NOW()
+  
+  </insert>
+  
+  <delete id="delete" parameterType="String">
+  	DELETE FROM product
+  	WHERE idproduct = ${param}
+  
+  </delete>
+</mapper>
+
+

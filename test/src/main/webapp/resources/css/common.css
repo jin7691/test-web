@@ -1,0 +1,52 @@
+@charset "EUC-KR";
+
+#search {
+	
+}
+
+
+tr > td  {
+  font-weight: bold;
+  vertical-align: meddle;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  background: #eee;
+  
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: baseline;
+    border-top: 1px solid #ddd;
+    background: #eee;
+}
+
+.table {
+	width: auto;
+}
+
+table {
+	font-size: 8px;
+}
+
+.search {
+	width : 5%;
+	
+	text-align: center;
+	
+}
+
+.navbar-right {
+	float: right;
+}
+
+.reallyHidden {
+	display: none !important;
+}
+
+.slick-cell-modified { 
+     background-color: yellow; 
+    } 
